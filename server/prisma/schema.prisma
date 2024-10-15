@@ -1,0 +1,75 @@
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+  relationMode = "prisma"
+}
+
+model tasks {
+  id       Int @id @default(autoincrement())
+  userId Int?
+  folderId Int?
+  parentId Int?
+  name     String
+  description    String?
+  tagId Int?
+  isImportant Boolean @default(false)
+  date DateTime
+  createdAt DateTime @default(now())
+  status TaskStatus @default(ACTIVE)
+}
+
+enum TaskStatus {
+    ACTIVE
+    DONE
+    REMOVED
+}
+
+model tags {
+    id Int @id @default(autoincrement())
+    userId Int?
+    name     String
+    color String?
+    status Boolean @default(true)
+}
+
+model habits {
+    id       Int @id @default(autoincrement())
+  userId Int?
+  type HabitType @default(DAILY)
+  name     String
+  plan    String?
+  createdAt DateTime @default(now())
+  status Boolean @default(true)
+}
+enum HabitType {
+    DAILY
+    WEEKLY
+}
+
+model doneHabits {
+    id Int @id @default(autoincrement())
+    habitId Int
+    date DateTime @default(now())
+    status Boolean @default(true)
+}
+
+model folders {
+    id Int @id @default(autoincrement())
+    userId Int?
+    name String
+    date DateTime @default(now())
+    status Boolean @default(true)
+}
+
+model users {
+    id Int @id @default(autoincrement())
+    name String
+    password String
+    createdAt DateTime @default(now())
+    status Boolean @default(true)
+}

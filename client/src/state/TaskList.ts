@@ -1,0 +1,61 @@
+import { ISortedTasks, TaskStatus } from "../types";
+
+//
+export const taskList: ISortedTasks = {
+  1728432000000: [
+    {
+      id: "task1",
+      userId: 1,
+      position: 1,
+      folderId: null,
+      parentId: null,
+      name: "Выучить реакт",
+      description: null,
+      tag: "прога",
+      isImportant: false,
+      date: "2024-10-09",
+      status: TaskStatus.ACTIVE,
+    },
+    {
+      id: "task2",
+      userId: 1,
+      position: 2,
+      folderId: null,
+      parentId: null,
+      name: "Пробежка",
+      description: null,
+      tag: "спорт",
+      isImportant: false,
+      date: "2024-10-09",
+      status: TaskStatus.ACTIVE,
+    },
+  ],
+  1728518400000: [
+    {
+      id: "task3",
+      userId: 1,
+      position: 1,
+      folderId: null,
+      parentId: null,
+      name: "запилить функцию",
+      description: null,
+      tag: "работа",
+      isImportant: false,
+      date: "2024-10-10",
+      status: TaskStatus.ACTIVE,
+    },
+    {
+      id: "task4",
+      userId: 1,
+      position: 2,
+      folderId: null,
+      parentId: null,
+      name: "Отжимания",
+      description: null,
+      tag: "спорт",
+      isImportant: false,
+      date: "2024-10-10",
+      status: TaskStatus.ACTIVE,
+    },
+  ],
+};
