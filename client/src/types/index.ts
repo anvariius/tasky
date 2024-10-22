@@ -3,26 +3,20 @@ export interface ITag {
   color?: string;
 }
 
+export type Id = string | number;
+
 export enum TaskStatus {
   ACTIVE,
   DONE,
   REMOVED,
 }
 
-export enum DragActions {
-  DragOver,
-  DragEnd,
-}
-
 export interface ITask {
   id: number | string;
   userId: number;
-  position: number;
-  folderId: number | null;
-  parentId: number | null;
   name: string;
   description: string | null;
-  tag?: string;
+  tag?: ITag;
   isImportant: boolean;
   date: string;
   status: TaskStatus;

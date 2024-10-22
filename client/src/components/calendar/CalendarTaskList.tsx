@@ -1,20 +1,28 @@
 import TaskCard from "../cards/TaskCard.tsx";
 import { getDate, getDay } from "../../utils/utils.ts";
 import { ITask } from "../../types";
-import { useDroppable } from "@dnd-kit/core";
-import { rectSortingStrategy, SortableContext } from "@dnd-kit/sortable";
+import NewTaskCard from "../cards/NewTaskCard.tsx";
 
 export default function CalendarTaskList({
   date,
   tasks,
+  dragStart,
+  dragEnd,
+  changeTask,
+  addTask,
+  removeTask,
 }: {
   date: number;
   tasks: ITask[] | undefined;
+  dragStart: Function;
+  dragEnd: Function;
+  changeTask: Function;
+  addTask: () => void;
+  removeTask: Function;
 }) {
-  const { setNodeRef } = useDroppable({ id: date });
   const isToday = date === new Date().setHours(0, 0, 0, 0);
   return (
-    <div className="flex flex-col gap-y-4">
+    <div className="flex flex-col gap-y-4 group">
       <div className="flex flex-col justify-center items-center">
         <div className={`font-bold text-6xl ${isToday && "text-orange"}`}>
           {getDate(date)}
@@ -23,16 +31,26 @@ export default function CalendarTaskList({
           {getDay(date)}
         </div>
       </div>
-      <SortableContext
-        id={date.toString()}
-        items={tasks ? tasks.map((t) => t.id) : []}
-        strategy={rectSortingStrategy}
+      <div
+        className="flex flex-col gap-y-4 min-h-64"
+        onDragOver={(e) => e.preventDefault()}
+        onDrop={(e) => dragEnd(date, e.target)}
       >
-        <div className="flex flex-col gap-y-4 min-h-64" ref={setNodeRef}>
-          {tasks &&
-            tasks.map((task) => <TaskCard key={task.name} task={task} />)}
+        {tasks &&
+          tasks.map((task) => (
+            <TaskCard
+              key={task.id}
+              task={task}
+              date={date}
+              dragStart={dragStart}
+              changeTask={changeTask}
+              removeTask={removeTask}
+            />
+          ))}
+        <div className="opacity-0 group-hover:opacity-100 transition duration-500">
+          <NewTaskCard onClick={addTask} />
         </div>
-      </SortableContext>
+      </div>
     </div>
   );
 }

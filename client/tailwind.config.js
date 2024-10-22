@@ -12,6 +12,7 @@ export default {
       yellow: "#EAFF00",
       gray: "#ECEDEE",
       white: "#FAFAFA",
+      red: "red",
     },
     extend: {},
   },
