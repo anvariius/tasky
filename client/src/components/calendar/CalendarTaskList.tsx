@@ -5,6 +5,7 @@ import NewTaskCard from "../cards/NewTaskCard.tsx";
 
 export default function CalendarTaskList({
   date,
+  today,
   tasks,
   dragStart,
   dragEnd,
@@ -13,6 +14,7 @@ export default function CalendarTaskList({
   removeTask,
 }: {
   date: number;
+  today: number;
   tasks: ITask[] | undefined;
   dragStart: Function;
   dragEnd: Function;
@@ -20,7 +22,7 @@ export default function CalendarTaskList({
   addTask: () => void;
   removeTask: Function;
 }) {
-  const isToday = date === new Date().setHours(0, 0, 0, 0);
+  const isToday = date === today;
   return (
     <div className="flex flex-col gap-y-4 group">
       <div className="flex flex-col justify-center items-center">

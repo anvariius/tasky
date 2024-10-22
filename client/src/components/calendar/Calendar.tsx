@@ -14,7 +14,7 @@ export default function Calendar() {
   const dndHook = useDragAndDrop(handleTaskDrag);
 
   const [swiper, setSwiper] = useState<SwiperType | null>(null);
-  const { dates, currentDate, setCurrentDate } = useCalendar();
+  const { dates, currentDate, setCurrentDate, today } = useCalendar();
 
   const handleSlideChange = (s: SwiperType) => {
     setCurrentDate(dates[s.activeIndex]);
@@ -39,6 +39,7 @@ export default function Calendar() {
               date={date}
               tasks={tasks[date]}
               {...dndHook}
+              today={today}
               changeTask={updateTaskProperty}
               addTask={() => addNewTask(date)}
               removeTask={removeTask}

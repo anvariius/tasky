@@ -30,7 +30,7 @@ export default function TaskCard({
     );
   };
   const handleNameChange = (name: string) => {
-    if (name) changeTask(date, task.id, "name", name);
+    changeTask(date, task.id, "name", name);
   };
   const handleRemoveTask = () => {
     confirm("Вы действительно хотите удалить задачу?") &&
@@ -42,7 +42,7 @@ export default function TaskCard({
   };
   return (
     <div
-      className={`task-card flex flex-col justify-between bg-gray bg-opacity-50 transition hover:bg-opacity-100 rounded-3xl p-5 relative overflow-hidden group ${task.status !== TaskStatus.ACTIVE && "opacity-50"}`}
+      className={`task-card flex flex-col justify-between border bg-gray bg-opacity-50 transition hover:bg-opacity-100 rounded-3xl p-5 relative overflow-hidden group ${task.status !== TaskStatus.ACTIVE && "opacity-50"} ${task.isImportant ? "border-orange" : "border-gray"}`}
       id={task.id.toString()}
       draggable="true"
       onDragStart={() => dragStart(date, task.id)}
@@ -61,13 +61,13 @@ export default function TaskCard({
         </div>
         <div className="flex gap-1 items-center">
           <div
-            className={`cursor-pointer opacity-0 group-hover:opacity-100 transition text-orange text-xl`}
+            className={`cursor-pointer opacity-0 group-hover:opacity-100 transition text-red text-xl`}
             onClick={handleRemoveTask}
           >
             <VscTrash />
           </div>
           <div
-            className={`cursor-pointer transition text-xl ${task.isImportant ? "text-red opacity-100" : "text-purple opacity-0 group-hover:opacity-100"}`}
+            className={`cursor-pointer transition text-xl ${task.isImportant ? "text-orange opacity-100" : "text-dark opacity-0 group-hover:opacity-100"}`}
             onClick={() => handleStatusChange("isImportant", !task.isImportant)}
           >
             <VscFlame />

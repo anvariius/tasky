@@ -1,9 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Id, ISortedTasks, ITask, TaskStatus } from "../types";
-import { taskList } from "../state/TaskList.ts";
 
 export const useTasks = () => {
-  const [tasks, setTasks] = useState<ISortedTasks>(taskList);
+  const lsTasks = localStorage.getItem("tasks");
+  const [tasks, setTasks] = useState<ISortedTasks>(
+    lsTasks ? JSON.parse(lsTasks) : {},
+  );
 
   const handleTaskDrag = ({
     activeId,
@@ -66,6 +68,7 @@ export const useTasks = () => {
       name: `new task #${maxId + 1}`,
       description: "",
       isImportant: false,
+      tag: null,
       date: new Date().toISOString(),
       status: TaskStatus.ACTIVE,
     });
@@ -77,6 +80,10 @@ export const useTasks = () => {
       [column]: tasks[column].filter((t) => t.id !== taskId),
     });
   };
+
+  useEffect(() => {
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+  }, [tasks]);
 
   return {
     tasks,

@@ -16,7 +16,7 @@ export interface ITask {
   userId: number;
   name: string;
   description: string | null;
-  tag?: ITag;
+  tag: ITag | null;
   isImportant: boolean;
   date: string;
   status: TaskStatus;

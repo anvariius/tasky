@@ -11,6 +11,8 @@ function App() {
           <div className="bg-yellow"></div>
           <div className="bg-orange"></div>
           <div className="bg-purple"></div>
+          <div className="bg-green"></div>
+          <div className="bg-lightBlue"></div>
         </div>
       </div>
       <div className="w-full overflow-x-hidden">
