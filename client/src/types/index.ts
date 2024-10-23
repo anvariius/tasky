@@ -25,3 +25,9 @@ export interface ITask {
 export interface ISortedTasks {
   [key: string]: ITask[];
 }
+
+export interface ITaskStats {
+  activeTasks: number | null;
+  doneTasks: number | null;
+  expiredTasks: number | null;
+}
